@@ -1,7 +1,7 @@
 ---
 title: "GF-0604 Procesamiento de datos geográficos<br>Laboratorio 02: R - Graficación básica"
-author: "Manuel Vargas"
-date: "2020-04-20"
+author: "Marget Aracelly Martínez"
+date: "2020-04-28"
 output:
   html_document:
     theme: readable    
@@ -57,19 +57,40 @@ print(ca_covid19)
 2. (10%) Genere un resumen de los datos con la función  ```summary() ```.
 
 ```{r}
+summary(ca_covid19)
 
 ```
 
 3. (10%) Con la función ```barplot()```, genere un gráfico de barras de los casos confirmados.
 
 ```{r}
+#vector de nombre de países
+paises = c("BLZ", "NIC", "GTM", "HND", "SLV", "CRI", "PAN", "DOM" )
 
+# vector de casos confirmados
+confirmados = c(18, 10, 316, 510, 237, 681, 4821, 5300)
+
+# data frame de ambos vectores
+ca_covid19 = data.frame(
+                        pais = paises, 
+                        confirmados = confirmados
+                      )
+
+print(ca_covid19)
+
+barplot(height = ca_covid19$confirmados)
 ```
 
 4. (10%) Con la función  ```order()```, ordene el data frame por cantidad de casos confirmados y genere de nuevo el gráfico.
 
 ```{r}
+# Ordenar de mayor a menor
+confirmados.ordenado <- order(ca_covid19$confirmados, decreasing=TRUE)
 
+# Nuevo data frame ordenado
+ca_covid19.confirmados <- ca_covid19[confirmados.ordenado,]
+
+barplot(height = ca_covid19.confirmados$confirmados)
 ```
 
 5. (10%) Incluya en el gráfico los siguientes componentes:
@@ -78,7 +99,13 @@ print(ca_covid19)
 - Titulo del gráfico.
 
 ```{r}
-
+barplot(
+  height=ca_covid19.confirmados$confirmados, 
+  names.arg=ca_covid19.confirmados$pais, 
+  xlab="País", 
+  ylab="Casos confirmados", 
+  main="Casos confirmados de Covid-19 en Centroamérica y República Dominicana"
+)
 ```
 
 6. Genere gráficos similares al del paso anterior para:
@@ -86,9 +113,70 @@ print(ca_covid19)
 - (25%) Casos fallecidos.
 
 ```{r}
+#vector de nombre de países
+paises = c("BLZ", "NIC", "GTM", "HND", "SLV", "CRI", "PAN", "DOM" )
+
+# vector de casos activos
+activos = c(14, 1, 282, 434, 167, 495, 4451, 4459)
+
+# data frame de ambos vectores
+ca_covid19 = data.frame(
+                        pais = paises, 
+                        activos = activos
+                      )
+
+print(ca_covid19)
+
+barplot(height = ca_covid19$activos)
+
+# Ordenar de mayor a menor
+activos.ordenado <- order(ca_covid19$activos, decreasing=TRUE)
+
+# Nuevo data frame ordenado
+ca_covid19.activos <- ca_covid19[activos.ordenado,]
+
+barplot(height = ca_covid19.activos$activos)
+
+barplot(
+  height=ca_covid19.activos$activos, 
+  names.arg=ca_covid19.activos$pais, 
+  xlab="País", 
+  ylab="Casos activos", 
+  main="Casos activos de Covid-19 en Centroamérica y República Dominicana"
+)
 
 ```
 
 ```{r}
+#vector de nombre de países
+paises = c("BLZ", "NIC", "GTM", "HND", "SLV", "CRI", "PAN", "DOM" )
 
+# vector de fallecidos
+fallecidos = c(2, 2, 10, 46, 7, 6, 141, 260)
+
+# data frame de ambos vectores
+ca_covid19 = data.frame(
+                        pais = paises, 
+                        fallecidos = fallecidos
+                      )
+
+print(ca_covid19)
+
+barplot(height = ca_covid19$fallecidos)
+
+# Ordenar de mayor a menor
+fallecidos.ordenado <- order(ca_covid19$fallecidos, decreasing=TRUE)
+
+# Nuevo data frame ordenado
+ca_covid19.fallecidos <- ca_covid19[fallecidos.ordenado,]
+
+barplot(height = ca_covid19.fallecidos$fallecidos)
+
+barplot(
+  height=ca_covid19.fallecidos$fallecidos, 
+  names.arg=ca_covid19.fallecidos$pais, 
+  xlab="País", 
+  ylab="Fallecidos", 
+  main="Fallecidos por Covid-19 en Centroamérica y República Dominicana"
+)
 ```
